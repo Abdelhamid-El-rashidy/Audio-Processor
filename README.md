@@ -1,79 +1,68 @@
-# 🎧 Audio Processor
+## 🧩 Cloning the Project with JUCE Submodule
 
-This project is part of **CS213 - Object Oriented Programming (Cairo University)**.
-It is a C++ application built using the **JUCE Framework**, providing various **audio processing** functionalities with a GUI interface.
-
----
-
-## 🚀 Project Setup
-
-### 1. Clone the Repository
-
-Clone the project along with its submodules (JUCE framework):
+This project uses **JUCE** as a Git submodule.
+To clone it properly with all dependencies, run:
 
 ```bash
-git clone --recursive https://github.com/<your-username>/Audio-Processor.git
-cd Audio-Processor
+git clone --recurse-submodules https://github.com/Abdelhamid-El-rashidy/Audio-Processor.git
 ```
 
-If you forgot to use `--recursive`, run:
+If you already cloned it without the submodule, run:
 
 ```bash
 git submodule update --init --recursive
 ```
 
----
+### 💡 Notes
 
-## 🧩 Build Instructions
+* The JUCE folder will appear after initialization (not stored directly in this repo).
+* Do **not** modify or push changes from inside the `JUCE` folder.
+* To update JUCE to the latest version:
 
-### Using CMake (Recommended)
-
-1. Create a build directory:
-
-   ```bash
-   mkdir -p build/Debug
-   cd build/Debug
-   ```
-
-2. Configure and build the project:
-
-   ```bash
-   cmake ../..
-   make
-   ```
-
-3. Run the executable:
-
-   ```bash
-   ./AudioProcessor
-   ```
+  ```bash
+  cd JUCE
+  git pull origin master
+  cd ..
+  git add JUCE
+  git commit -m "Update JUCE submodule"
+  git push
+  ```
 
 ---
 
-## 🧠 Submodule Update Guide
+## ⚙️ Build Instructions
 
-If the **JUCE** submodule appears modified or empty, make sure it’s properly synced:
+### 🧱 Option 1 — Build with CLion (Recommended)
+
+1. Open **CLion**.
+2. Select **“Open Project”** and choose the folder `Audio Processor/`.
+3. CLion will automatically detect your **CMakeLists.txt**.
+4. Set the build configuration to **Debug** or **Release**.
+5. Click **Run ▶️** to build and launch the JUCE application.
+
+> 💡 Make sure to install dependencies before building:
+>
+> ```bash
+> sudo apt install libasound2-dev libfreetype6-dev libx11-dev libxrandr-dev \
+> libxinerama-dev libxcursor-dev libxi-dev
+> ```
+
+---
+
+### 🧰 Option 2 — Build from Terminal
+
+If you prefer to build manually without CLion:
 
 ```bash
-git submodule update --init --recursive
+# 1. Create build directory
+mkdir -p build && cd build
+
+# 2. Configure with CMake
+cmake ..
+
+# 3. Compile
+make -j$(nproc)
+
+# 4. Run the app
+./AudioProcessor
 ```
-
-This ensures JUCE’s source is fetched and consistent with the project.
-
----
-
-## 🛠️ Folder Structure
-
-```
-Audio-Processor/
-│
-├── Source/               # Main source code (.cpp/.h)
-├── CMakeLists.txt        # CMake configuration
-├── JUCE/                 # JUCE framework (submodule)
-├── build/                # Local build directory (ignored in git)
-├── README.md             # Project documentation
-└── resources/            # Images, icons, and assets
-```
-
-
-
